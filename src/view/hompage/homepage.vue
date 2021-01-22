@@ -1,6 +1,9 @@
 <template>
   <div class="homepage">
-      123
+      <div class="banner">
+          这里是banner区域。为什么要加banner，当然是因为好看啊
+          <img src="" alt="">
+      </div>
   </div>
 </template>
 
@@ -17,5 +20,10 @@ export default {
         margin: auto;
         border: 1px solid #333;
 
+    }
+    .banner{
+        width: 100%;
+        height: 300px;
+        border: 1px solid red;
     }
 </style>

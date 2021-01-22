@@ -14,6 +14,6 @@ export default {
 }
 </script>
 
-<style src="../public/common.css">
+<style src="../public/css/common.css">
 
 </style>
