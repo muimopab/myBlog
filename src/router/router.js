@@ -15,7 +15,7 @@ const router=new Router({
     },{
         path:"/test",
         name:"test",
-        component:()=>import("@/view/test.vue"),
+        component:()=>import("../components/mavonEditor.vue"),
         meta:{
             title:"测试页面",
             keepAlive:true

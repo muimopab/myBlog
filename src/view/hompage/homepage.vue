@@ -1,29 +1,60 @@
 <template>
   <div class="homepage">
-      <div class="banner">
-          这里是banner区域。为什么要加banner，当然是因为好看啊
-          <img src="" alt="">
+    <div class="banner">
+      <banner></banner>
+      <div>
+        <mavon-editor @backText="getText"></mavon-editor>
       </div>
+      <div class="markdown-body" v-html="htmlText"></div>
+    </div>
   </div>
 </template>
 
 <script>
+import banner from "./components/banner";
+// import showdown from "showdown";
+import $mavonEditor from "../../components/mavonEditor";
 export default {
-
-}
+  data() {
+    return {
+      markdownText: "",
+      htmlText: "",
+    };
+  },
+  methods: {
+    getText(val){
+      let {markdownText,htmlText}=val;
+      markdownText;
+      this.htmlText=htmlText;
+      console.log(val)
+    },
+  },
+  components: {
+    "banner": banner,
+    "mavon-editor":$mavonEditor
+  },
+};
 </script>
 
 <style lang="scss">
-    .homepage{
-        width: 1000px;
-        height: 10000px;
-        margin: auto;
-        border: 1px solid #333;
-
-    }
-    .banner{
-        width: 100%;
-        height: 300px;
-        border: 1px solid red;
-    }
+.homepage {
+  width: 1000px;
+  height: 10000px;
+  margin: auto;
+  border: 1px solid #333;
+}
+pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-family: SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;
+}
+img {
+    max-width: 100%;
+    box-sizing: content-box;
+    background-color: #fff;
+}
 </style>

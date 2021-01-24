@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "element-ui": "^2.15.0",
+    "mavon-editor": "^2.9.1",
+    "node-loader": "^1.0.2",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.1",
+    "showdown": "^1.9.1",
     "vue": "^2.6.11",
     "vue-router": "^3.4.9"
   },
