@@ -5,11 +5,13 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import mavonEditor from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
+import axios from 'axios'
 
 Vue.use(ElementUI)
 Vue.use(mavonEditor)
 
 Vue.config.productionTip = false
+Vue.prototype.$http=axios
 
 router.beforeEach((to,from,next)=>{
   if(to.meta.title){
@@ -18,6 +20,8 @@ router.beforeEach((to,from,next)=>{
   }
 })
 
+axios.defaults.baseURL="/blog";
+Vue.config.productionTip = false;
 
 new Vue({
   router,

@@ -23,10 +23,28 @@ export default {
   },
   methods: {
     getText(val){
-      let {markdownText,htmlText}=val;
-      markdownText;
-      this.htmlText=htmlText;
-      console.log(val)
+      let {
+        articlesTitle,
+        articlesTypeCode,
+        markdownText,
+        articlesContent,
+        createDate,
+        articlesAuthorId,
+      }=val;
+      let params={
+        articlesTitle,
+        articlesTypeCode,
+        markdownText,
+        articlesContent,
+        createDate,
+        articlesAuthorId,
+      };
+      console.log("请求数据",params)
+      this.$http.post('blog/test',params).then(res=>{
+          console.log(res)
+      })
+    //   this.htmlText=htmlText;
+    //   console.log(val)
     },
   },
   components: {

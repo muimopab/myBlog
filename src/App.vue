@@ -17,3 +17,8 @@ export default {
 <style src="../public/css/common.css">
 
 </style>
+<style lang="scss">
+  #app{
+    --themeColor:#3370ff
+  }
+</style>
