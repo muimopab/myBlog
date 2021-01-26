@@ -3,7 +3,7 @@
     <div class="banner">
       <banner></banner>
       <div>
-        <mavon-editor @backText="getText"></mavon-editor>
+        <mavon-editor v-if="isShow" @backText="getText"></mavon-editor>
       </div>
       <div class="markdown-body" v-html="htmlText"></div>
     </div>
@@ -14,15 +14,33 @@
 import banner from "./components/banner";
 // import showdown from "showdown";
 import $mavonEditor from "../../components/mavonEditor";
+import Http from "../../api/api";
 export default {
   data() {
     return {
       markdownText: "",
       htmlText: "",
+      isShow: true,
+      pageNum: 1,
+      pageSize: 10,
     };
   },
+  created() {
+    let params = {
+      pageNum: this.pageNum,
+      pageSize: this.pageSize,
+    };
+    Http.getArticleList(params).then((res) => {
+      console.log(res);
+    });
+  },
+  watch: {
+    isShow() {
+      console.log(this.isShow, "isShow");
+    },
+  },
   methods: {
-    getText(val){
+    getText(val) {
       let {
         articlesTitle,
         articlesTypeCode,
@@ -30,8 +48,8 @@ export default {
         articlesContent,
         createDate,
         articlesAuthorId,
-      }=val;
-      let params={
+      } = val;
+      let params = {
         articlesTitle,
         articlesTypeCode,
         markdownText,
@@ -39,17 +57,38 @@ export default {
         createDate,
         articlesAuthorId,
       };
-      console.log("请求数据",params)
-      this.$http.post('blog/test',params).then(res=>{
-          console.log(res)
-      })
-    //   this.htmlText=htmlText;
-    //   console.log(val)
+      console.log("请求数据", params);
+      Http.addArticle(params).then((res) => {
+        console.log(res);
+        let vm = this;
+        if (res) {
+          if (res.msg === "success") {
+            this.$message({
+              showClose: true,
+              message: "添加成功！",
+              type: "success",
+              duration: 1000,
+              onClose: () => {
+                vm.$set(vm, "isShow", false);
+                vm.$nextTick(() => {
+                  vm.$set(vm, "isShow", true);
+                });
+              },
+            });
+          } else if (res.msg === "fail") {
+            this.$message({
+              showClose: true,
+              message: "添加失败！",
+              type: "error",
+            });
+          }
+        }
+      });
     },
   },
   components: {
-    "banner": banner,
-    "mavon-editor":$mavonEditor
+    banner: banner,
+    "mavon-editor": $mavonEditor,
   },
 };
 </script>
@@ -68,11 +107,12 @@ pre {
   line-height: 1.45;
   background-color: #f6f8fa;
   border-radius: 3px;
-  font-family: SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
 }
 img {
-    max-width: 100%;
-    box-sizing: content-box;
-    background-color: #fff;
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: #fff;
 }
 </style>

@@ -5,7 +5,6 @@
         placeholder="请输入文章标题哦~"
         v-model="title"
         class="input-with-select"
-        style="margin-bottom:10px"
         maxlength="50"
         show-word-limit
       >
@@ -39,7 +38,7 @@ export default {
   data() {
     return {
       title: "",
-      articlesTypeCode: "",
+      articlesTypeCode: "1",
       markdownText: "",
       htmlText: "",
       changeEvent: null,
@@ -103,6 +102,9 @@ export default {
   beforeMount() {
     this.changeEvent = utils.debounce(this.getMarkdownText, 3000);
   },
+  beforeDestroy(){
+    console.log("组件销毁")
+  }
 };
 </script>
 
