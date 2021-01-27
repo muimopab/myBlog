@@ -8,7 +8,7 @@ const cors=require("cors");
 const history = require('connect-history-api-fallback');
 
 /*引入路由模块*/
-let blog=require("./routes/lvyou.js")
+let blog=require("./routes/blog.js")
 let user=require("./routes/users.js")
 
 

@@ -5,6 +5,9 @@
       <div>
         <mavon-editor v-if="isShow" @backText="getText"></mavon-editor>
       </div>
+      <div>
+        <article-list></article-list>
+      </div>
       <div class="markdown-body" v-html="htmlText"></div>
     </div>
   </div>
@@ -15,6 +18,7 @@ import banner from "./components/banner";
 // import showdown from "showdown";
 import $mavonEditor from "../../components/mavonEditor";
 import Http from "../../api/api";
+import articleList from "../article/articleList"
 export default {
   data() {
     return {
@@ -42,20 +46,20 @@ export default {
   methods: {
     getText(val) {
       let {
-        articlesTitle,
-        articlesTypeCode,
+        articleTitle,
+        articleTypeCode,
         markdownText,
-        articlesContent,
+        articleContent,
         createDate,
-        articlesAuthorId,
+        articleAuthorId,
       } = val;
       let params = {
-        articlesTitle,
-        articlesTypeCode,
+        articleTitle,
+        articleTypeCode,
         markdownText,
-        articlesContent,
+        articleContent,
         createDate,
-        articlesAuthorId,
+        articleAuthorId,
       };
       console.log("请求数据", params);
       Http.addArticle(params).then((res) => {
@@ -87,8 +91,9 @@ export default {
     },
   },
   components: {
-    banner: banner,
+    "banner": banner,
     "mavon-editor": $mavonEditor,
+    "article-list":articleList,
   },
 };
 </script>
@@ -98,7 +103,7 @@ export default {
   width: 1000px;
   height: 10000px;
   margin: auto;
-  border: 1px solid #333;
+  // border: 1px solid #333;
 }
 pre {
   padding: 16px;

@@ -27,12 +27,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `blog_articles` (
-  `articlesId` int(11) NOT NULL COMMENT '文章id',
-  `articlesTitle` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `articlesContent` varchar(10000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '文章内容',
-  `articlesAuthorId` int(11) DEFAULT NULL COMMENT '文章作者id',
-  `articlesType` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '技术类' COMMENT '文章类型',
-  `articlesTypeCode` int(100) NOT NULL DEFAULT '1' COMMENT '文章类型编码',
+  `articleId` int(11) NOT NULL COMMENT '文章id',
+  `articleTitle` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `articleContent` varchar(10000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '文章内容',
+  `articleAuthorId` int(11) DEFAULT NULL COMMENT '文章作者id',
+  `articleType` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '技术类' COMMENT '文章类型',
+  `articleTypeCode` int(100) NOT NULL DEFAULT '1' COMMENT '文章类型编码',
   `createDate` bigint(20) NOT NULL COMMENT '创建时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -40,7 +40,7 @@ CREATE TABLE `blog_articles` (
 -- 转存表中的数据 `blog_articles`
 --
 
-INSERT INTO `blog_articles` (`articlesId`, `articlesTitle`, `articlesContent`, `articlesAuthorId`, `articlesType`, `articlesTypeCode`, `createDate`) VALUES
+INSERT INTO `blog_articles` (`articleId`, `articleTitle`, `articleContent`, `articleAuthorId`, `articleType`, `articleTypeCode`, `createDate`) VALUES
 (1, '????', '<p>这是内容</p>\n', NULL, '1', 1, 0),
 (2, '这是标题123', '<p>这是内容123</p>\n', NULL, '1', 1, 0),
 (3, '这是标题1234', '<p>这是内容1234</p>\n', NULL, '1', 1, 0),
@@ -111,7 +111,7 @@ INSERT INTO `blog_articles` (`articlesId`, `articlesTitle`, `articlesContent`, `
 -- Indexes for table `blog_articles`
 --
 ALTER TABLE `blog_articles`
-  ADD PRIMARY KEY (`articlesId`);
+  ADD PRIMARY KEY (`articleId`);
 
 --
 -- 在导出的表使用AUTO_INCREMENT
@@ -121,7 +121,7 @@ ALTER TABLE `blog_articles`
 -- 使用表AUTO_INCREMENT `blog_articles`
 --
 ALTER TABLE `blog_articles`
-  MODIFY `articlesId` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章id', AUTO_INCREMENT=62;
+  MODIFY `articleId` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章id', AUTO_INCREMENT=62;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

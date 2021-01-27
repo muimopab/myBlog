@@ -3,13 +3,14 @@
     <div>
       <el-input
         placeholder="请输入文章标题哦~"
-        v-model="title"
+        v-model="formData.title"
         class="input-with-select"
         maxlength="50"
         show-word-limit
+        clearable
       >
         <el-select
-          v-model="articlesTypeCode"
+          v-model="formData.articleTypeCode"
           slot="prepend"
           placeholder="请选择"
           style="width:100px"
@@ -20,25 +21,44 @@
         <!-- <el-button slot="append" icon="el-icon-search"></el-button> -->
       </el-input>
     </div>
+    <div>
+      <el-input
+        type="textarea"
+        placeholder="请输入描述来介绍您的文章~"
+        v-model="formData.introduce"
+        maxlength="500"
+        show-word-limit
+      >
+      </el-input>
+    </div>
     <mavon-editor
-      v-model="markdownText"
+      v-model="formData.markdownText"
       @change="changeEvent"
       :toolbars="toolbars"
     ></mavon-editor>
     <div class="btn_box">
       <el-button @click="backText" size="medium">保存草稿</el-button>
-      <el-button @click="backText" type="primary" size="medium">上传</el-button>
+      <el-button @click="upload" type="primary" size="medium">上传</el-button>
     </div>
   </div>
 </template>
 
 <script>
 import utils from "../utils/utils";
+import Http from "../api/api";
 export default {
   data() {
     return {
+      formData: {
+        title: "",
+        introduce: "",
+        articleTypeCode: "1",
+        markdownText: "",
+        htmlText: "",
+      },
       title: "",
-      articlesTypeCode: "1",
+      introduce: "",
+      articleTypeCode: "1",
       markdownText: "",
       htmlText: "",
       changeEvent: null,
@@ -81,30 +101,72 @@ export default {
     };
   },
   methods: {
+    // 将数据传递给父组件
     backText() {
       // let author = localStorage.getItem("user");
       let authorId = localStorage.getItem("userId");
       let createDate = new Date().getTime();
       this.$emit("backText", {
-        articlesTitle: this.title,
-        articlesTypeCode: this.articlesTypeCode,
+        articleTitle: this.title,
+        articleTypeCode: this.articleTypeCode,
         markdownText: this.markdownText,
-        articlesContent: this.htmlText,
+        articleContent: this.htmlText,
         createDate: createDate,
-        articlesAuthorId: authorId,
+        articleAuthorId: authorId,
+        articleIntroduce: this.introduce,
+      });
+    },
+    // 直接调用接口将数据传给后台
+    upload() {
+      this.formData.date=new Date().getTime();
+      let params={
+        articleTitle: this.formData.title,
+        articleTypeCode: this.formData.articleTypeCode,
+        markdownText: this.formData.markdownText,
+        articleContent: this.formData.htmlText,
+        createDate:this.formData.date,
+        articleAuthorId: null,
+        articleIntroduce: this.formData.introduce,
+      };
+      console.log(params)
+      // return false;
+      Http.addArticle(params).then((res) => {
+        console.log(res);
+        let vm = this;
+        if (res) {
+          if (res.msg === "success") {
+            this.$message({
+              showClose: true,
+              message: "添加成功！",
+              type: "success",
+              duration: 1000,
+              onClose: () => {
+               this.$nextTick(()=>{
+                 this.$forceUpdate()
+               })
+              },
+            });
+          } else if (res.msg === "fail") {
+            this.$message({
+              showClose: true,
+              message: "添加失败！",
+              type: "error",
+            });
+          }
+        }
       });
     },
     getMarkdownText(val, rander) {
       // console.log(rander);
-      this.htmlText = rander;
+      this.formData.htmlText = rander;
     },
   },
   beforeMount() {
     this.changeEvent = utils.debounce(this.getMarkdownText, 3000);
   },
-  beforeDestroy(){
-    console.log("组件销毁")
-  }
+  beforeDestroy() {
+    console.log("组件销毁");
+  },
 };
 </script>
 
