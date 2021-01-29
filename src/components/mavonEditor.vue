@@ -107,13 +107,13 @@ export default {
       let authorId = localStorage.getItem("userId");
       let createDate = new Date().getTime();
       this.$emit("backText", {
-        articleTitle: this.title,
-        articleTypeCode: this.articleTypeCode,
-        markdownText: this.markdownText,
-        articleContent: this.htmlText,
-        createDate: createDate,
-        articleAuthorId: authorId,
-        articleIntroduce: this.introduce,
+        articleTitle: this.formData.title,
+        articleTypeCode: this.formData.articleTypeCode,
+        markdownText: this.formData.markdownText,
+        articleContent: this.formData.htmlText,
+        createDate:this.formData.date,
+        articleAuthorId: null,
+        articleIntroduce: this.formData.introduce,
       });
     },
     // 直接调用接口将数据传给后台

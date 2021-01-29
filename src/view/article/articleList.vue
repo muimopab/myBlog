@@ -7,13 +7,23 @@
         v-for="(item, index) in articleList"
         :key="index"
       >
-        <div class="title">{{ item.articleTitle }}</div>
-        <div class="introduce">{{ item.articleIntroduce }}</div>
-        <div class="iconBox"></div>
+        <!-- <router-link :to="{ path: `/articleDetails?id=${item.articleId}`}"> -->
+        <router-link :to="{ name: 'articleDetails',query:{id:item.articleId} }">
+          <div class="title">{{ item.articleTitle }}</div>
+          <div class="introduce">{{ item.articleIntroduce }}</div>
+          <div class="iconBox"></div>
+        </router-link>
       </div>
     </section>
     <footer>
-      <el-pagination background layout="prev, pager, next" :total="total" @current-change="currentChange" hide-on-single-page style="float:right"></el-pagination>
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="total"
+        @current-change="currentChange"
+        hide-on-single-page
+        style="float:right"
+      ></el-pagination>
     </footer>
   </div>
 </template>
@@ -24,7 +34,7 @@ export default {
   data() {
     return {
       articleList: [],
-      total:0
+      total: 0,
     };
   },
   methods: {
@@ -37,13 +47,13 @@ export default {
         console.log(res);
         if (res.code == 200) {
           this.articleList = res.data;
-            this.total=res.total;
+          this.total = res.total;
         }
       });
     },
-    currentChange(val){
-        this.getArticleList(val, 10);
-    }
+    currentChange(val) {
+      this.getArticleList(val, 10);
+    },
   },
   created() {
     this.getArticleList(1, 10);
@@ -64,6 +74,7 @@ export default {
       background: #ebeef5;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+      cursor: pointer;
       &:hover {
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2), 0 0 6px rgba(0, 0, 0, 0.1);
         transform: translate(-4px, -4px);

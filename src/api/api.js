@@ -8,5 +8,8 @@ export default {
     /**--------------获取全部文章--------------**/
     getArticleList(params){
         return Http.get('/blog/getArticleList',params)
+    },
+    getArticleDetails(params){
+        return Http.get('/blog/getArticleDetails',params)
     }
 }

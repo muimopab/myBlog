@@ -16,14 +16,14 @@ r.post('/addArticle', (req, res) => {
 		articleContent,
 		createDate,
 		articleAuthorId
-	}=obj
+	} = obj
 	if (articleTypeCode == 1) {
 		articleType = "技术类"
-	}else if(articleTypeCode == 2){
+	} else if (articleTypeCode == 2) {
 		articleType = "生活类"
 	}
 	let sql = "INSERT INTO blog_articles(articleTitle,articleIntroduce,articleType,articleTypeCode,articleContent,createDate,articleAuthorId) VALUES (?,?,?,?,?,?,?)";
-	p.query(sql, [articleTitle, articleIntroduce,articleType, articleTypeCode, articleContent, createDate, articleAuthorId], (err, result) => {
+	p.query(sql, [articleTitle, articleIntroduce, articleType, articleTypeCode, articleContent, createDate, articleAuthorId], (err, result) => {
 		if (err) throw err;
 		if (result.affectedRows === 1) {
 			res.send({ code: 200, msg: "success" })
@@ -32,6 +32,22 @@ r.post('/addArticle', (req, res) => {
 		}
 		console.log(result)
 	})
+}
+)
+//指定文章id调用
+r.get('/getArticleDetails', (req, res) => {
+	console.log("调用文章详情接口...")
+	let { articleId } = req.query;
+	let sql = "SELECT * FROM blog_articles WHERE articleId=?"
+	p.query(sql, [articleId], (err, result) => {
+		if(err) throw err;
+		if(result.length>=1){
+			res.send({
+				code:200,
+				data:result[0]
+			})
+		}
+	})
 })
 
 // 调用所有文章
@@ -39,10 +55,10 @@ r.get('/getArticleList', (req, res) => {
 	console.log("调用文章列表接口...")
 	let obj = req.query;
 	let total;
-	let getTotal="SELECT COUNT(articleId) AS total FROM blog_articles";
-	p.query(getTotal,[],(err,result)=>{
-		if(err) throw err;
-		total=result[0].total
+	let getTotal = "SELECT COUNT(articleId) AS total FROM blog_articles";
+	p.query(getTotal, [], (err, result) => {
+		if (err) throw err;
+		total = result[0].total
 	})
 	//获得计算分页所需数据
 	let { pageNum, pageSize } = obj;
@@ -53,7 +69,7 @@ r.get('/getArticleList', (req, res) => {
 		if (err) throw err;
 		res.send({
 			code: 200,
-			total:total,
+			total: total,
 			data: result
 		})
 	})

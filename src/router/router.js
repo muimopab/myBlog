@@ -3,24 +3,41 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const router=new Router({
-    routes:[{
-        path:"/",
-        name:"homepage",
-        component:()=>import("@/view/hompage/homepage.vue"),
-        meta:{
-            title:"我的博客网站",
-            keepAlive:false
-        }
-    },{
-        path:"/test",
-        name:"test",
-        component:()=>import("../components/mavonEditor.vue"),
-        meta:{
-            title:"测试页面",
-            keepAlive:true
-        }
-    }]
+const router = new Router({
+    mode: "history",
+    scrollBehavior(to, from, savedPosition) {
+        return {x:0,y:0} // router跳转后scrollTop初始化
+    },
+    routes: [
+        {
+            path: "/",
+            name: "homepage",
+            component: () => import("@/view/hompage/homepage.vue"),
+            meta: {
+                title: "我的博客网站",
+                keepAlive: false
+            }
+        },
+        {
+            path: "/articleDetails",
+            name: "articleDetails",
+            props: true,
+            component: () => import("@/view/article/articleDetails"),
+            meta: {
+                title: false,
+                keepAlive: true
+            }
+        },
+        {
+            path: "/test",
+            name: "test",
+            component: () => import("../components/mavonEditor.vue"),
+            meta: {
+                title: "测试页面",
+                keepAlive: true
+            }
+        },
+    ]
 })
 
 export default router

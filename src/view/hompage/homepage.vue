@@ -53,6 +53,7 @@ export default {
         createDate,
         articleAuthorId,
       } = val;
+      this.htmlText=articleContent
       let params = {
         articleTitle,
         articleTypeCode,
@@ -62,6 +63,7 @@ export default {
         articleAuthorId,
       };
       console.log("请求数据", params);
+      return
       Http.addArticle(params).then((res) => {
         console.log(res);
         let vm = this;
@@ -105,16 +107,7 @@ export default {
   margin: auto;
   // border: 1px solid #333;
 }
-pre {
-  padding: 16px;
-  overflow: auto;
-  font-size: 85%;
-  line-height: 1.45;
-  background-color: #f6f8fa;
-  border-radius: 3px;
-  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier,
-    monospace;
-}
+
 img {
   max-width: 100%;
   box-sizing: content-box;
