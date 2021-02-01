@@ -1,11 +1,13 @@
 <template>
-  <div class="articleDetails">
+  <div class="articleDetails" id="articleDetails">
     <aside>
       <!-- <router-link to="#_0">1</router-link> -->
       <div class="anchorBox" id="anchorBox">
         <ul>
-          <li v-for="index in 10" :key="index">
-            <a :href="`#_${index - 1}`" :data-anchor="`_${index - 1}`">{{ index }}</a>
+          <li v-for="(item, index) in articleTitle" :key="index" v-anchor>
+            <a :href="`#_${index - 1}`" :data-anchor="`_${index - 1}`">{{
+              item
+            }}</a>
           </li>
         </ul>
       </div>
@@ -33,21 +35,22 @@ export default {
   data() {
     return {
       article: [],
+      articleTitle: [],
     };
   },
-  mounted(){
-    
 
+  mounted() {
+    this.$nextTick(() => {
+      for (let i = 0; true; i++) {
+        let DOM = document.getElementById(`_${i}`);
+        if (!DOM) return false;
+        let title = DOM.parentElement.innerText;
+        this.articleTitle.push(title);
+        console.log(this.articleTitle);
+        // console.log(dom);
+      }
+    });
   },
-  // updated(){
-  //    let DOM=document.getElementById("_1")
-  //     // console.log(DOM,1231312)
-  //   // console.log("触发")
-  //   this.$nextTick(()=>{
-  //     // this.$forceUpdate()
-  //   })
-    
-  // },
   methods: {
     getArticleDetails(params) {
       Http.getArticleDetails(params)
