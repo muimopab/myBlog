@@ -3,11 +3,13 @@
     <aside>
       <!-- <router-link to="#_0">1</router-link> -->
       <div class="anchorBox" id="anchorBox">
-        <ul>
-          <li v-for="(item, index) in articleTitle" :key="index" v-anchor>
-            <a :href="`#_${index - 1}`" :data-anchor="`_${index - 1}`">{{
-              item
-            }}</a>
+        <ul @click="jumpAnchor">
+          <li
+            v-for="(item, index) in articleTitle"
+            :key="index"
+            :data-anchor="`_${index}`"
+          >
+            {{ item }}
           </li>
         </ul>
       </div>
@@ -39,42 +41,47 @@ export default {
     };
   },
 
-  mounted() {
-    this.$nextTick(() => {
+  methods: {
+    jumpAnchor(e) {
+      let anchorDom = document.getElementById(e.target.dataset.anchor);
+      console.log(e.target.dataset.anchor);
+      console.log(anchorDom);
+      if (anchorDom) {
+        anchorDom.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    // 获取文章中所有标题
+    getArticleTitles() {
       for (let i = 0; true; i++) {
         let DOM = document.getElementById(`_${i}`);
-        if (!DOM) return false;
+        if (!DOM) {
+          this.getArticleTitles = null; // 当寻找不到指定元素的时候停止循环，并注销这个方法，否则死循环
+          return false;
+        }
         let title = DOM.parentElement.innerText;
         this.articleTitle.push(title);
-        console.log(this.articleTitle);
-        // console.log(dom);
       }
-    });
-  },
-  methods: {
+    },
     getArticleDetails(params) {
       Http.getArticleDetails(params)
         .then((res) => {
           if (res.code == 200) {
             this.article = res.data;
-            if (this.article.articleContent) {
-              this.addAnchor(this.article.articleContent);
-            }
           }
         })
         .catch((error) => {
           throw error;
         });
     },
-    addAnchor(str) {
-      console.log("输入的内容", typeof str);
-      // <h1><a id="_0"></a>一级标题</h1>
-      // <h2><a id="_1"></a>二级标题</h2>
-      // <h3><a id="_2"></a>三级标题</h3>
-      // <h4><a id="_3"></a>四级标题</h4>
-      // <h5><a id="_4"></a>五级标题</h5>
-      // <h6><a id="_5"></a>六级标题</h6>
-    },
+  },
+  updated() {
+    console.log(1232)
+    if (this.getArticleTitles) {
+      this.getArticleTitles();
+    }
+  },
+  beforeDestroy(){
+    this.articleTitle=[];
   },
   beforeRouteEnter: (from, to, next) => {
     next((vm) => {
@@ -89,7 +96,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .articleDetails {
-  $asideWidth: 300px;
+  // $asideWidth: 1200px;
   width: 1200px;
   margin: 0 auto;
   /deep/ .markdown-body {
@@ -103,14 +110,15 @@ export default {
   }
   aside {
     position: relative;
-    float: left;
-    width: $asideWidth;
+    float: right;
+    width: 61.8%;
     height: 10000px;
+    border: 1px solid red;
     .anchorBox {
       // border: 1px solid #82394829;
       position: fixed;
       top: 100px;
-      width: $asideWidth - 100px;
+      width: 100%;
       ul {
         display: flex;
         flex-direction: column;
@@ -124,6 +132,8 @@ export default {
           border-bottom: 0 !important;
         }
         li {
+          cursor: pointer;
+
           height: 30px;
           padding: 5px;
           border: 1px solid #82394829;
@@ -142,7 +152,7 @@ export default {
   article {
     height: 10000px;
     padding: 30px;
-    margin-left: $asideWidth;
+    margin-right: call(100%-61.8%);
     // border: 1px solid red;
     .title {
       margin-bottom: 30px;

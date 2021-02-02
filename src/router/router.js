@@ -25,7 +25,7 @@ const router = new Router({
             component: () => import("@/view/article/articleDetails"),
             meta: {
                 title: false,
-                keepAlive: true
+                keepAlive: false
             }
         },
         {
