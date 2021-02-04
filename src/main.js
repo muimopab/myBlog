@@ -7,7 +7,10 @@ import mavonEditor from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
 import 'mavon-editor/dist/markdown/github-markdown.min.css';
 import axios from 'axios'
+import '../public/css/common.css'
+import '../public/css/themeColor.scss'
 import * as directives from './directives/index'
+
 
 Vue.use(ElementUI)
 Vue.use(mavonEditor)

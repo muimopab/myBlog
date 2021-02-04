@@ -111,9 +111,10 @@ export default {
   aside {
     position: relative;
     float: right;
-    width: 61.8%;
+    width: calc(100% - 61.8%);
     height: 10000px;
     border: 1px solid red;
+    box-sizing: border-box;
     .anchorBox {
       // border: 1px solid #82394829;
       position: fixed;
@@ -150,9 +151,10 @@ export default {
     }
   }
   article {
+    box-sizing: border-box;
     height: 10000px;
     padding: 30px;
-    margin-right: call(100%-61.8%);
+    width: 61.8%;
     // border: 1px solid red;
     .title {
       margin-bottom: 30px;

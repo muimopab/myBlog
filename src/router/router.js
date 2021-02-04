@@ -6,7 +6,7 @@ Vue.use(Router)
 const router = new Router({
     mode: "history",
     scrollBehavior(to, from, savedPosition) {
-        return {x:0,y:0} // router跳转后scrollTop初始化
+        return { x: 0, y: 0 } // router跳转后scrollTop初始化
     },
     routes: [
         {
@@ -15,6 +15,15 @@ const router = new Router({
             component: () => import("@/view/hompage/homepage.vue"),
             meta: {
                 title: "我的博客网站",
+                keepAlive: false
+            }
+        },
+        {
+            path: "/userCenter",
+            name: "个人中心",
+            component: () => import("@/view/userCenter/index.vue"),
+            meta: {
+                title: "个人中心",
                 keepAlive: false
             }
         },
@@ -31,7 +40,7 @@ const router = new Router({
         {
             path: "/test",
             name: "test",
-            component: () => import("../components/mavonEditor.vue"),
+            component: () => import("@/view/test.vue"),
             meta: {
                 title: "测试页面",
                 keepAlive: true

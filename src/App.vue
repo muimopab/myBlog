@@ -14,11 +14,8 @@ export default {
 }
 </script>
 
-<style src="../public/css/common.css">
-
-</style>
 <style lang="scss">
-  #app{
-    --themeColor:#3370ff
-  }
+  // #app{
+  //   --themeColor:#3370ff
+  // }
 </style>

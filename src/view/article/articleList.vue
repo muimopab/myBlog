@@ -1,6 +1,21 @@
 <template>
   <div class="articleList">
-    <header></header>
+    <el-row class="searchBox">
+      <el-col :span="4">123</el-col>
+      <el-col :span="20">
+        <el-row>
+          <el-col :span="10">
+            <el-input
+              placeholder="请输入内容"
+              v-model="search"
+              class="searchInput"
+            >
+              <i slot="prefix" class="el-input__icon el-icon-search"></i>
+            </el-input>
+          </el-col>
+        </el-row>
+      </el-col>
+    </el-row>
     <section class="articleBox">
       <div
         class="articleItem"
@@ -8,7 +23,9 @@
         :key="index"
       >
         <!-- <router-link :to="{ path: `/articleDetails?id=${item.articleId}`}"> -->
-        <router-link :to="{ name: 'articleDetails',query:{id:item.articleId} }">
+        <router-link
+          :to="{ name: 'articleDetails', query: { id: item.articleId } }"
+        >
           <div class="title">{{ item.articleTitle }}</div>
           <div class="introduce">{{ item.articleIntroduce }}</div>
           <div class="iconBox"></div>
@@ -35,6 +52,7 @@ export default {
     return {
       articleList: [],
       total: 0,
+      search: "",
     };
   },
   methods: {
@@ -52,28 +70,45 @@ export default {
       });
     },
     currentChange(val) {
-      this.getArticleList(val, 10);
+      this.getArticleList(val, 9);
     },
   },
   created() {
-    this.getArticleList(1, 10);
+    this.getArticleList(1, 9);
   },
 };
 </script>
 
 <style lang="scss">
 .articleList {
+  .searchBox {
+    margin-bottom: 20px;
+    min-height: 140px;
+    padding: 16px;
+    background: var(--light);
+    border-radius: 10px;
+    .searchInput {
+      input {
+        border-radius: 50px;
+      }
+    }
+  }
   .articleBox {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     .articleItem {
-      display: flex;
       flex-direction: column;
-      min-height: 100px;
-      max-height: 200px;
+      // flex: 0 0 30%;
+      width: 32%;
+      display: flex;
+      height: 45vh;
       margin-bottom: 20px;
       padding: 35px 25px 25px 25px;
-      background: #ebeef5;
+      border: 1px solid var(--cyan);
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
       cursor: pointer;
       &:hover {
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2), 0 0 6px rgba(0, 0, 0, 0.1);
@@ -91,7 +126,7 @@ export default {
         text-overflow: ellipsis;
       }
       .introduce {
-        flex-shrink: 1;
+        flex-shrink: 0;
         font-size: 15px;
         text-indent: 2em;
         display: -webkit-box;
