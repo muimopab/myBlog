@@ -17,6 +17,7 @@
     "sass-loader": "^10.1.1",
     "showdown": "^1.9.1",
     "vue": "^2.6.11",
+    "vue-aplayer": "^1.6.1",
     "vue-router": "^3.4.9"
   },
   "devDependencies": {
@@ -29,7 +30,7 @@
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
-    "root": true,
+    "root": false,
     "env": {
       "node": true
     },
