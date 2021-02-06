@@ -37,7 +37,7 @@
                 class="el-input__icon el-icon-search"
                 @click="search"
               ></i>
-            </el-input>
+           </el-input>
           </el-col>
         </el-row>
       </el-col>
@@ -50,6 +50,7 @@
       >
         <!-- <router-link :to="{ path: `/articleDetails?id=${item.articleId}`}"> -->
         <router-link
+        style="height:100%"
           :to="{ name: 'articleDetails', query: { id: item.articleId } }"
         >
           <div class="title">{{ item.articleTitle }}</div>
@@ -182,9 +183,9 @@ export default {
       display: flex;
       flex: 0 0 32%;
       flex-direction: column;
-      height: 29%;
+      height: 32vh;
       margin-bottom: 20px;
-      padding: 35px 25px 25px 25px;
+      padding: 20px;
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
@@ -200,7 +201,7 @@ export default {
       }
       .title {
         flex-shrink: 0;
-        padding-bottom: 20px;
+        padding-bottom: 16px;
         font-size: 20px;
         font-weight: 700;
         line-height: 20px;
@@ -209,12 +210,14 @@ export default {
         text-overflow: ellipsis;
       }
       .introduce {
-        flex-shrink: 0;
+        height:calc(100% - 62px);
+        // flex-shrink: 0;
+        padding-bottom: 20px;
         font-size: 15px;
         text-indent: 2em;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
+        // -webkit-line-clamp: 3;
         overflow: hidden;
       }
       .iconBox {
