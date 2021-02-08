@@ -1,6 +1,6 @@
 <template>
   <div class="articleList">
-    <el-row class="searchBox">
+    <el-row class="searchBox" v-fixed="`test`">
       <el-col :span="4">
         <el-image
           fit="fill"
@@ -132,7 +132,6 @@ export default {
       });
     },
     currentChange(val) {
-      // console.log(val)
       this.getArticleList(val, 9);
     },
   },
@@ -143,11 +142,18 @@ export default {
 </script>
 
 <style lang="scss">
+.test{
+    position: fixed;
+    z-index: 100;
+    top:0;
+    box-sizing: border-box;
+}
 .articleList {
   display: flex;
   flex-direction: column;
   height: 100%;
   .searchBox {
+      background: #fff;
     input,
     button {
       border-color: transparent;

@@ -14,9 +14,4 @@ export default {
 
         }
     }
-    // console.log(el)
-    // console.log(el.dataset.anchor)
-    // let id=el.dataset.anchor;
-    // console.log(document)
-    // console.log(document.getElementById("anchorBox"))
 }

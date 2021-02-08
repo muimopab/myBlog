@@ -8,7 +8,6 @@
 
 <script>
 import aplayer from "vue-aplayer";
-import "../../public/player/祖堅正慶 - 天つ風 ~白虎征魂戦~.mp3"
 export default {
   data() {
     return {
@@ -16,7 +15,7 @@ export default {
         {
           title: "天つ風 ~白虎征魂戦~.mp3",
           artist: "祖堅正慶",
-          src:"../../public/player/祖堅正慶 - 天つ風 ~白虎征魂戦~.mp3",
+          src:"",
           pic:"",
           showLrc: "[00:00.00] (,,•́ . •̀,,) 刚刚开始学钢琴弹的hhhh",
         },

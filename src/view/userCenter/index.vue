@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import Http from "../../api/api"
 import articleList from "../../view/article/articleList";
 import vueAplayer from "../../components/vueAplayer";
 import draw from "./userInfoDeatil"
@@ -64,19 +65,29 @@ export default {
     return {
       str1: "",
       activeName: "",
+      userInfo:"",
       str:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id eos in qui mollitia neque, sit, deleniti ea nemo iure quo aut, aliquam quam sequi! Facere numquam iste earum deleniti magnam. Cum, laboriosam voluptates eum aspernatur asperiores ratione animi possimus sapiente delectus quo similique officia, saepe ipsum fuga repellendus doloribus, nisi obcaecati repudiandae explicabo necessitatibus eligendi quidem molestiae pariatur. Exercitationem, excepturi? Amet, praesentium nemo magnam error facilis cupiditate. Deserunt cupiditate necessitatibus voluptatibus laudantium, quasi ducimus atque praesentium dolor unde inventore dolorem magnam, maiores enim impedit eaque perspiciatis iusto sunt tempore? Perferendis, cumque maiores fuga, soluta necessitatibus sapiente laboriosam provident fugiat, eligendi nostrum blanditiis commodi temporibus? Porro maiores corrupti harum vero, labore veritatis, cum consequatur fugit voluptas aliquid repudiandae perspiciatis est explicabo molestias. Amet placeat quisquam nesciunt! Debitis nisi praesentium amet reprehenderit odio libero rerum temporibus impedit obcaecati! Dolor obcaecati nam nisi amet explicabo reprehenderit quis iure autem modi harum dolorum laboriosam ullam illo voluptatum facere eaque, enim veritatis. Ullam quidem commodi, dicta optio amet accusamus ut rem? Quaerat quae, magnam repellat deserunt tempora at in, porro deleniti fugit quibusdam autem nulla voluptatem debitis dolorem laboriosam, harum tenetur non obcaecati mollitia fuga. Nihil ut maiores eius neque necessitatibus odit ab autem sequi!",
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id eos in qui mollitia neque, sit, deleniti ea nemo iure quo aut, aliquam quam sequi! Facere numquam iste earum deleniti magnam. Cum, laboriosam voluptates eum aspernatur asperiores ratione animi possimus sapiente delectus quo similique officia, saepe ipsum fuga repellendus doloribus, nisi obcaecati repudiandae explicabo necessitatibus eligendi quidem molestiae pariatur. Exercitationem, excepturi? Amet, praesentium nemo magnam error facilis cupiditate. Deserunt cupiditate necessitatibus voluptatibus laudantium!",
     };
   },
   methods: {
+    //   关闭手风琴
     closeCollapse () {
       this.activeName = "";
     },
-    checkUserInfo () {
-      this.$message({
-        type: "warning",
-        message: "别催了，在做了亲~",
-      });
+
+    checkUserInfo (userId) {
+        let params={
+            userId:userId
+        }
+      Http.getUserInfo(params).then(res=>{
+          if(res.code===200){
+              this.$set(this,"userInfo",res.data)
+              res.data
+          }
+          console.log(res)
+          
+      })
     },
   },
   components: {
@@ -84,6 +95,9 @@ export default {
     "vue-aplayer": vueAplayer,
     "draw": draw
   },
+  created(){
+      this.checkUserInfo(1)
+  }
 };
 </script>
 <style lang="scss">

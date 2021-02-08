@@ -9,7 +9,7 @@ const history = require('connect-history-api-fallback');
 
 /*引入路由模块*/
 let blog=require("./routes/blog.js")
-let user=require("./routes/users.js")
+let user=require("./routes/user.js")
 
 
 var app = express();

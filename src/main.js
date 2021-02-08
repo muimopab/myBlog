@@ -33,7 +33,7 @@ router.beforeEach((to, from, next) => {
 })
 
 
-axios.defaults.baseURL = "/blog";
+axios.defaults.baseURL = "/blog"||"/user";
 Vue.config.productionTip = false;
 
 new Vue({
