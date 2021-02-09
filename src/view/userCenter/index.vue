@@ -4,7 +4,8 @@
       <!-- 菜单工作台 -->
       <el-col :span="6"
               class="aside">
-        <div class="item">
+        <user-menu></user-menu>
+        <!-- <div class="item">
           <div class="userBox shadow-only-bottom">
             <el-image src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimglf6.nosdn0.126.net%2Fimg%2FUzZjNmZVWEJ1dGVGSVR6L08zc1hUaGdxTWV5WXdvejRyYTBhN1lBeGVkaU1oMkJKK1VIc053PT0.jpg%3FimageView%26thumbnail%3D500x0%26quality%3D96%26stripmeta%3D0%26type%3Djpg&refer=http%3A%2F%2Fimglf6.nosdn0.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1615109963&t=db9186de5b5b51bc8f875dbafa5caf45"></el-image>
             <div class="userName"
@@ -37,7 +38,7 @@
               <div>{{ str }}</div>
             </el-collapse-item>
           </el-collapse>
-        </div>
+        </div> -->
         <vue-aplayer class="vueAplayer"></vue-aplayer>
       </el-col>
       <!-- 页面显示面板 -->
@@ -60,12 +61,13 @@ import Http from "../../api/api"
 import articleList from "../../view/article/articleList";
 import vueAplayer from "../../components/vueAplayer";
 import draw from "./userInfoDeatil"
+import userMenu from "./userMenu"
 export default {
   data () {
     return {
       str1: "",
       activeName: "",
-      userInfo:"",
+      userInfo: "",
       str:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id eos in qui mollitia neque, sit, deleniti ea nemo iure quo aut, aliquam quam sequi! Facere numquam iste earum deleniti magnam. Cum, laboriosam voluptates eum aspernatur asperiores ratione animi possimus sapiente delectus quo similique officia, saepe ipsum fuga repellendus doloribus, nisi obcaecati repudiandae explicabo necessitatibus eligendi quidem molestiae pariatur. Exercitationem, excepturi? Amet, praesentium nemo magnam error facilis cupiditate. Deserunt cupiditate necessitatibus voluptatibus laudantium!",
     };
@@ -77,26 +79,27 @@ export default {
     },
 
     checkUserInfo (userId) {
-        let params={
-            userId:userId
+      let params = {
+        userId: userId
+      }
+      Http.getUserInfo(params).then(res => {
+        if (res.code === 200) {
+          this.$set(this, "userInfo", res.data)
+          res.data
         }
-      Http.getUserInfo(params).then(res=>{
-          if(res.code===200){
-              this.$set(this,"userInfo",res.data)
-              res.data
-          }
-          console.log(res)
-          
+        console.log(res)
+
       })
     },
   },
   components: {
     "article-list": articleList,
     "vue-aplayer": vueAplayer,
-    "draw": draw
+    "draw": draw,
+    "user-menu": userMenu
   },
-  created(){
-      this.checkUserInfo(1)
+  created () {
+    this.checkUserInfo(1)
   }
 };
 </script>

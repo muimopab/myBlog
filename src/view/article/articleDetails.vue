@@ -1,20 +1,30 @@
 <template>
-  <div class="articleDetails" id="articleDetails">
-    <aside>
-      <!-- <router-link to="#_0">1</router-link> -->
-      <div class="anchorBox" id="anchorBox">
+  <div class="articleDetails"
+       id="articleDetails">
+    <aside class="el-col-5 shadow border-radius-10">
+      <div class="userInfo">
+
+        <el-image src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimglf6.nosdn0.126.net%2Fimg%2FUzZjNmZVWEJ1dGVGSVR6L08zc1hUaGdxTWV5WXdvejRyYTBhN1lBeGVkaU1oMkJKK1VIc053PT0.jpg%3FimageView%26thumbnail%3D500x0%26quality%3D96%26stripmeta%3D0%26type%3Djpg&refer=http%3A%2F%2Fimglf6.nosdn0.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1615109963&t=db9186de5b5b51bc8f875dbafa5caf45">
+
+        </el-image>
+        <div>
+            
+        </div>
+      </div>
+
+      <div class="anchorBox"
+           id="anchorBox">
         <ul @click="jumpAnchor">
-          <li
-            v-for="(item, index) in articleTitle"
-            :key="index"
-            :data-anchor="`_${index}`"
-          >
+          <li v-for="(item, index) in articleTitle"
+              :key="index"
+              :data-anchor="`_${index}`">
             {{ item }}
           </li>
         </ul>
       </div>
+
     </aside>
-    <article>
+    <article class="el-col-18 shadow border-radius-10">
       <div class="title">{{ article.articleTitle }}</div>
       <ul class="articleBar">
         <li>作者：muimopab</li>
@@ -23,10 +33,12 @@
         <li>收藏：32</li>
         <li>评论：1000</li>
       </ul>
-      <div class="introduce" v-if="article.articleIntroduce">
+      <div class="introduce"
+           v-if="article.articleIntroduce">
         {{ article.articleIntroduce }}
       </div>
-      <div class="markdown-body content" v-html="article.articleContent"></div>
+      <div class="markdown-body content"
+           v-html="article.articleContent"></div>
     </article>
   </div>
 </template>
@@ -34,7 +46,7 @@
 <script>
 import Http from "../../api/api";
 export default {
-  data() {
+  data () {
     return {
       article: [],
       articleTitle: [],
@@ -42,7 +54,7 @@ export default {
   },
 
   methods: {
-    jumpAnchor(e) {
+    jumpAnchor (e) {
       let anchorDom = document.getElementById(e.target.dataset.anchor);
       console.log(e.target.dataset.anchor);
       console.log(anchorDom);
@@ -51,7 +63,7 @@ export default {
       }
     },
     // 获取文章中所有标题
-    getArticleTitles() {
+    getArticleTitles () {
       for (let i = 0; true; i++) {
         let DOM = document.getElementById(`_${i}`);
         if (!DOM) {
@@ -62,7 +74,7 @@ export default {
         this.articleTitle.push(title);
       }
     },
-    getArticleDetails(params) {
+    getArticleDetails (params) {
       Http.getArticleDetails(params)
         .then((res) => {
           if (res.code == 200) {
@@ -74,14 +86,14 @@ export default {
         });
     },
   },
-  updated() {
+  updated () {
     console.log(1232)
     if (this.getArticleTitles) {
       this.getArticleTitles();
     }
   },
-  beforeDestroy(){
-    this.articleTitle=[];
+  beforeDestroy () {
+    this.articleTitle = [];
   },
   beforeRouteEnter: (from, to, next) => {
     next((vm) => {
@@ -96,9 +108,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .articleDetails {
-  // $asideWidth: 1200px;
+  display: flex;
+  justify-content: space-between;
   width: 1200px;
   margin: 0 auto;
+  padding: 20px;
   /deep/ .markdown-body {
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
       "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
@@ -110,15 +124,10 @@ export default {
   }
   aside {
     position: relative;
-    float: right;
-    width: calc(100% - 61.8%);
-    height: 10000px;
-    border: 1px solid red;
-    box-sizing: border-box;
+    flex: 0 1 20%;
+    height: 100vh;
+    margin-right: 20px;
     .anchorBox {
-      // border: 1px solid #82394829;
-      position: fixed;
-      top: 100px;
       width: 100%;
       ul {
         display: flex;
@@ -151,13 +160,14 @@ export default {
     }
   }
   article {
+    flex: 1 0 auto;
     box-sizing: border-box;
-    height: 10000px;
     padding: 30px;
-    width: 61.8%;
-    // border: 1px solid red;
     .title {
-      margin-bottom: 30px;
+      display: inline-block;
+      margin-bottom: 25px;
+      padding: 0 35px 10px 0px;
+      border-bottom: 3px solid var(--purple);
       font-size: 24px;
       font-weight: 700;
       color: #333;
@@ -173,7 +183,7 @@ export default {
     .introduce {
       margin-bottom: 20px;
       color: #999999;
-      text-indent: 2rem;
+      //   text-indent: 2rem;
       font-size: 14px;
     }
     .content {
