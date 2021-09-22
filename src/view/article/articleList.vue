@@ -1,65 +1,51 @@
 <template>
   <div class="articleList">
-    <el-row class="searchBox" v-fixed="`test`">
+    <el-row class="searchBox"
+            v-toTop="true">
       <el-col :span="4">
-        <el-image
-          fit="fill"
-          src="https://iknow-pic.cdn.bcebos.com/3bf33a87e950352a94ed1d895343fbf2b3118ba6?x-bce-process=image/resize,m_lfit,w_600,h_800,limit_1/quality,q_85"
-        ></el-image>
+        <el-image fit="fill"
+                  src="https://iknow-pic.cdn.bcebos.com/3bf33a87e950352a94ed1d895343fbf2b3118ba6?x-bce-process=image/resize,m_lfit,w_600,h_800,limit_1/quality,q_85"></el-image>
       </el-col>
       <el-col :span="20">
         <el-row>
-          <el-col :span="9" :offset="5">
-            <el-button
-              :round="true"
-              :type="sortRules == 'date' ? primary : ''"
-              data-type="date"
-              @click="changeSortRules('date')"
-              >按日期排序</el-button
-            >
-            <el-button
-              :round="true"
-              :type="sortRules == 'star' ? primary : ''"
-              data-type="star"
-              @click="changeSortRules('star')"
-              >按星级排序</el-button
-            >
+          <el-col :span="9"
+                  :offset="5">
+            <el-button :round="true"
+                       :type="sortRules == 'date' ? primary : ''"
+                       data-type="date"
+                       @click="changeSortRules('date')">按日期排序</el-button>
+            <el-button :round="true"
+                       :type="sortRules == 'star' ? primary : ''"
+                       data-type="star"
+                       @click="changeSortRules('star')">按星级排序</el-button>
           </el-col>
-          <el-col :span="10" style="padding-left:5px">
-            <el-input
-              placeholder="请输入您想查找的文章关键字"
-              v-model="searchContent"
-              class="searchInput"
-            >
-              <i
-                slot="suffix"
-                style="cursor: pointer;"
-                class="el-input__icon el-icon-search"
-                @click="search"
-              ></i>
-           </el-input>
+          <el-col :span="10"
+                  style="padding-left:5px">
+            <el-input placeholder="请输入您想查找的文章关键字"
+                      v-model="searchContent"
+                      class="searchInput">
+              <i slot="suffix"
+                 style="cursor: pointer;"
+                 class="el-input__icon el-icon-search"
+                 @click="search"></i>
+            </el-input>
           </el-col>
         </el-row>
       </el-col>
     </el-row>
     <section class="articleBox">
-      <div
-        class="articleItem"
-        v-for="(item, index) in articleList"
-        :key="index"
-      >
+      <div class="articleItem"
+           v-for="(item, index) in articleList"
+           :key="index">
         <!-- <router-link :to="{ path: `/articleDetails?id=${item.articleId}`}"> -->
-        <router-link
-        style="height:100%"
-          :to="{ name: 'articleDetails', query: { id: item.articleId } }"
-        >
+        <router-link style="height:100%"
+                     :to="{ name: 'articleDetails', query: { id: item.articleId } }">
           <div class="title">{{ item.articleTitle }}</div>
           <div class="introduce">{{ item.articleIntroduce }}</div>
           <div class="iconBox">
             <i class="el-icon-user"></i><span>阅读</span>
             <i class="el-icon-chat-dot-square"></i><span>评论</span>
-            <i class="el-icon-time"></i
-            ><span>{{
+            <i class="el-icon-time"></i><span>{{
               item.createDate
                 ? new Date(item.createDate).toLocaleDateString()
                 : ""
@@ -67,14 +53,12 @@
           </div>
         </router-link>
       </div>
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="total"
-        @current-change="currentChange"
-        hide-on-single-page
-        style="float:left"
-      ></el-pagination>
+      <el-pagination background
+                     layout="prev, pager, next"
+                     :total="total"
+                     @current-change="currentChange"
+                     hide-on-single-page
+                     style="float:left"></el-pagination>
     </section>
     <footer></footer>
   </div>
@@ -83,7 +67,7 @@
 <script>
 import Http from "../../api/api";
 export default {
-  data() {
+  data () {
     return {
       articleList: [],
       total: 0,
@@ -93,20 +77,20 @@ export default {
     };
   },
   watch: {
-    total() {
+    total () {
       console.log(this.total);
       new Date().toLocaleDateString;
     },
   },
   methods: {
-    search() {
+    search () {
       this.$message({
         type: "error",
         message: "功能尚未开发，敬请期待",
       });
     },
     // 改变排序规则
-    changeSortRules(val) {
+    changeSortRules (val) {
       console.log(val);
       if (val && val != this.sortRules) {
         this.sortRules = val;
@@ -116,7 +100,7 @@ export default {
         });
       }
     },
-    getArticleList(pageNum, pageSize) {
+    getArticleList (pageNum, pageSize) {
       let vm = this;
       let params = {
         pageNum: pageNum,
@@ -131,29 +115,29 @@ export default {
         }
       });
     },
-    currentChange(val) {
+    currentChange (val) {
       this.getArticleList(val, 9);
     },
   },
-  created() {
+  created () {
     this.getArticleList(1, 9);
   },
 };
 </script>
 
 <style lang="scss">
-.test{
-    position: fixed;
-    z-index: 100;
-    top:0;
-    box-sizing: border-box;
+.test {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  box-sizing: border-box;
 }
 .articleList {
   display: flex;
   flex-direction: column;
   height: 100%;
   .searchBox {
-      background: #fff;
+    background: #fff;
     input,
     button {
       border-color: transparent;
@@ -216,7 +200,7 @@ export default {
         text-overflow: ellipsis;
       }
       .introduce {
-        height:calc(100% - 62px);
+        height: calc(100% - 62px);
         // flex-shrink: 0;
         padding-bottom: 20px;
         font-size: 15px;
@@ -239,11 +223,13 @@ export default {
         span {
           margin-right: 10px;
         }
-        i,span {
+        i,
+        span {
           &:hover {
             color: var(--purple);
 
-            +i,+span {
+            + i,
+            + span {
               color: var(--purple);
             }
           }

@@ -20,7 +20,7 @@
         }
     }
 }
-.el-drawer__wrapper{
+.el-drawer__wrapper {
     outline: none;
 }
 .el-drawer__container {
@@ -90,11 +90,11 @@ button {
     }
 }
 // 通用圆角
-.border-radius-10{
+.border-radius-10 {
     border-radius: 10px;
 }
 // 定义阴影
-.shadow{
+.shadow {
     box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, 0.12), 0px 0px 6px rgba(0, 0, 0, 0.04);
 }
 .shadow-only-bottom {
@@ -125,4 +125,42 @@ button {
 ::-webkit-scrollbar-track {
     /*滚动条里面轨道*/
     background: transparent;
+}
+/** 弹性布局 **/
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.flex-between-column {
+    @extend .flex-between;
+    flex-direction: column;
+}
+.flex-around-column {
+    @extend .flex-around;
+    flex-direction: column;
+}
+/** 按钮遮罩 **/
+.btn-disabled {
+    opacity: 0.3 !important;
+    position: relative;
+}
+
+.btn-mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }

@@ -3,6 +3,9 @@
     <div class="banner">
       <banner></banner>
       <div>
+          <el-button type="primary" v-auth="['muimopab','123']" @click="show">测 试</el-button>
+      </div>
+      <div>
         <mavon-editor v-if="isShow" @backText="getText"></mavon-editor>
       </div>
       <div>
@@ -37,6 +40,9 @@ export default {
     Http.getArticleList(params).then((res) => {
       console.log(res);
     });
+    let obj={a:1,b:2,c:{d:3},e:[4,5,6],f:null,g:undefined,h:''}
+    let obj2=this.$utils.deepClone(obj)
+    console.log(obj2)
   },
   watch: {
     isShow() {
@@ -44,6 +50,9 @@ export default {
     },
   },
   methods: {
+      show(){
+          console.log(0)
+      },
     getText(val) {
       let {
         articleTitle,

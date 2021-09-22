@@ -11,6 +11,7 @@ import axios from 'axios'
 import '../public/css/common.scss'
 import '../public/css/themeColor.scss'
 import * as directives from './directives/index'
+import utils from './utils/utils'
 
 
 Vue.use(ElementUI)
@@ -18,7 +19,7 @@ Vue.use(mavonEditor)
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
-
+Vue.prototype.$utils=utils
 //  全局注册自定的vue指令
 Object.keys(directives).forEach((item,index)=>{
   Vue.directive(item,directives[item])

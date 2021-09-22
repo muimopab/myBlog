@@ -1,9 +1,11 @@
 import anchor from "./modules/anchor"
-import fixed from "./modules/fixed"
+import toTop from "./modules/toTop"
+import auth from "./modules/auth"
 
 
 
 export {
     anchor,
-    fixed
+    toTop,
+    auth
 }
