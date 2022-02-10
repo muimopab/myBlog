@@ -17,7 +17,7 @@ axios.interceptors.response.use(
             Message.error(response.data?.message ?? '系统异常')
             return Promise.reject(response.data)
         }
-        return response
+        return response.data
     },
     error => {
         console.log('错误', error.response)
@@ -55,7 +55,7 @@ export default class Http {
     }
     static get (url, params = {}, loading) {
         let config = {
-            methods: 'get',
+            method: 'get',
             url,
             data: params
         }
@@ -68,7 +68,7 @@ export default class Http {
     }
     static post (url, params = {}, loading) {
         let config = {
-            methods: 'post',
+            method: 'post',
             url,
             data: params
         }

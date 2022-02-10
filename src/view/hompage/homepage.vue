@@ -3,15 +3,14 @@
     <div class="banner">
       <banner></banner>
       <div>
-          <el-button type="primary" v-auth="['muimopab','123']" @click="show">测 试</el-button>
-      </div>
-      <div>
-        <mavon-editor v-if="isShow" @backText="getText"></mavon-editor>
+        <mavon-editor v-if="isShow"
+                      @backText="getText"></mavon-editor>
       </div>
       <div>
         <article-list></article-list>
       </div>
-      <div class="markdown-body" v-html="htmlText"></div>
+      <div class="markdown-body"
+           v-html="htmlText"></div>
     </div>
   </div>
 </template>
@@ -23,7 +22,7 @@ import $mavonEditor from "../../components/mavonEditor";
 import Http from "../../api/api";
 import articleList from "../article/articleList"
 export default {
-  data() {
+  data () {
     return {
       markdownText: "",
       htmlText: "",
@@ -32,24 +31,24 @@ export default {
       pageSize: 10,
     };
   },
-  created() {
+  created () {
     let params = {
       pageNum: this.pageNum,
       pageSize: this.pageSize,
     };
     Http.getArticleList(params).then((res) => {
     });
-    let obj={a:1,b:2,c:{d:3},e:[4,5,6],f:null,g:undefined,h:''}
-    let obj2=this.$utils.deepClone(obj)
+    let obj = { a: 1, b: 2, c: { d: 3 }, e: [4, 5, 6], f: null, g: undefined, h: '' }
+    let obj2 = this.$utils.deepClone(obj)
   },
   watch: {
-    isShow() {
+    isShow () {
     },
   },
   methods: {
-      show(){
-      },
-    getText(val) {
+    show () {
+    },
+    getText (val) {
       let {
         articleTitle,
         articleTypeCode,
@@ -58,7 +57,7 @@ export default {
         createDate,
         articleAuthorId,
       } = val;
-      this.htmlText=articleContent
+      this.htmlText = articleContent
       let params = {
         articleTitle,
         articleTypeCode,
@@ -67,7 +66,7 @@ export default {
         createDate,
         articleAuthorId,
       };
-      return
+    //   return
       Http.addArticle(params).then((res) => {
         let vm = this;
         if (res) {
@@ -98,7 +97,7 @@ export default {
   components: {
     "banner": banner,
     "mavon-editor": $mavonEditor,
-    "article-list":articleList,
+    "article-list": articleList,
   },
 };
 </script>

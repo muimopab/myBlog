@@ -67,13 +67,11 @@ r.get('/getArticleList', (req, res) => {
     let sql = 'SELECT * FROM blog_articles limit ?,?';
     p.query(sql, [start, pageSize], (err, result) => {
         if (err) throw err;
-        setTimeout(() => {
-            res.send({
-                code: 200,
-                total: total,
-                data: result
-            })
-        }, 10000)
+        res.send({
+            code: 200,
+            total: total,
+            data: result
+        })
     })
 })
 

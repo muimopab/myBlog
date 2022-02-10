@@ -7,7 +7,7 @@
 
         </el-image>
         <div>
-            
+            1
         </div>
       </div>
 
@@ -107,6 +107,8 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 1200px;
+  height: 100%;
+  overflow: hidden;
   margin: 0 auto;
   padding: 20px;
   /deep/ .markdown-body {
@@ -121,7 +123,7 @@ export default {
   aside {
     position: relative;
     flex: 0 1 20%;
-    height: 100vh;
+    height: 100%;
     margin-right: 20px;
     .anchorBox {
       width: 100%;
@@ -158,7 +160,9 @@ export default {
   article {
     flex: 1 0 auto;
     box-sizing: border-box;
+    height: 100%;
     padding: 30px;
+    overflow: auto;
     .title {
       display: inline-block;
       margin-bottom: 25px;

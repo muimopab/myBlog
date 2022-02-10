@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style lang="scss">
-  // #app{
-  //   --themeColor:#3370ff
-  // }
+  #app{
+      height: 100%;
+  }
 </style>

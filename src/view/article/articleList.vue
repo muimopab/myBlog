@@ -43,13 +43,7 @@
           <div class="title">{{ item.articleTitle }}</div>
           <div class="introduce">{{ item.articleIntroduce }}</div>
           <div class="iconBox">
-            <i class="el-icon-user"></i><span>阅读</span>
-            <i class="el-icon-chat-dot-square"></i><span>评论</span>
-            <i class="el-icon-time"></i><span>{{
-              item.createDate
-                ? new Date(item.createDate).toLocaleDateString()
-                : ""
-            }}</span>
+            <i class="el-icon-user"></i><span>阅读</span> <i class="el-icon-chat-dot-square"></i><span>评论</span> <i class="el-icon-time"></i><span>{{ item.createDate ? new Date(item.createDate).toLocaleDateString() : '' }}</span>
           </div>
         </router-link>
       </div>
@@ -65,62 +59,61 @@
 </template>
 
 <script>
-import Http from "../../api/api";
+import Http from '../../api/api'
 export default {
   data () {
     return {
       articleList: [],
       total: 0,
-      searchContent: "", // 搜索内容
-      sortRules: "date", //排序规则
-      primary: "primary",
-    };
+      searchContent: '', // 搜索内容
+      sortRules: 'date', //排序规则
+      primary: 'primary',
+    }
   },
   watch: {
     total () {
-      new Date().toLocaleDateString;
+      new Date().toLocaleDateString
     },
   },
   methods: {
     search () {
       this.$message({
-        type: "error",
-        message: "功能尚未开发，敬请期待",
-      });
+        type: 'error',
+        message: '功能尚未开发，敬请期待',
+      })
     },
     // 改变排序规则
     changeSortRules (val) {
       if (val && val != this.sortRules) {
-        this.sortRules = val;
+        this.sortRules = val
         this.$message({
-          type: "warning",
-          message: "功能尚未开发，敬请期待",
-        });
+          type: 'warning',
+          message: '功能尚未开发，敬请期待',
+        })
       }
     },
     getArticleList (pageNum, pageSize) {
-      let vm = this;
+      let vm = this
       let params = {
         pageNum: pageNum,
         pageSize: pageSize,
-      };
+      }
       Http.getArticleList(params).then((res) => {
         // console.log(res);
         if (res.code == 200) {
-          if (res.data) vm.$set(vm, "articleList", res.data);
-          if (res.total && res.total != vm.total)
-            vm.$set(vm, "total", res.total);
+          if (res.data) vm.$set(vm, 'articleList', res.data)
+          if (res.total && res.total != vm.total) vm.$set(vm, 'total', res.total)
         }
-      });
+      })
     },
     currentChange (val) {
-      this.getArticleList(val, 9);
+      this.getArticleList(val, 9)
     },
   },
   created () {
-    this.getArticleList(1, 9);
+    this.getArticleList(1, 9)
   },
-};
+}
 </script>
 
 <style lang="scss">
