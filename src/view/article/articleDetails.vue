@@ -3,7 +3,6 @@
        id="articleDetails">
     <aside class="el-col-5 shadow border-radius-10">
       <div class="userInfo">
-
         <el-image src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimglf6.nosdn0.126.net%2Fimg%2FUzZjNmZVWEJ1dGVGSVR6L08zc1hUaGdxTWV5WXdvejRyYTBhN1lBeGVkaU1oMkJKK1VIc053PT0.jpg%3FimageView%26thumbnail%3D500x0%26quality%3D96%26stripmeta%3D0%26type%3Djpg&refer=http%3A%2F%2Fimglf6.nosdn0.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1615109963&t=db9186de5b5b51bc8f875dbafa5caf45">
 
         </el-image>
@@ -56,8 +55,6 @@ export default {
   methods: {
     jumpAnchor (e) {
       let anchorDom = document.getElementById(e.target.dataset.anchor);
-      console.log(e.target.dataset.anchor);
-      console.log(anchorDom);
       if (anchorDom) {
         anchorDom.scrollIntoView({ behavior: "smooth" });
       }
@@ -87,7 +84,6 @@ export default {
     },
   },
   updated () {
-    console.log(1232)
     if (this.getArticleTitles) {
       this.getArticleTitles();
     }

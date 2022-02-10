@@ -31,9 +31,11 @@ export default {
     /**--------------获取sessionStorage键值--------------**/
     getSession (item) {
         return JSON.parse(sessionStorage.getItem(item))
-    }
-
-
-
-
+    },
+    
+    /**--------------数组去重--------------**/
+    removeRepeat (arr) {
+        let newArr = new Set([...arr])
+        return [...newArr]
+    },
 }

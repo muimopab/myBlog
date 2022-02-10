@@ -1,4 +1,6 @@
-module.exports={
+const rt = 'http://localhost:5050'
+
+module.exports = {
   //配置彻底懒加载
   chainWebpack:config=>{
     config.plugins.delete("prefetch")
@@ -9,10 +11,10 @@ module.exports={
     proxy: {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       '/blog': {
-        target: `http://localhost:5050`,//真实服务器地址
+        target: rt,//真实服务器地址
         changeOrigin: true, //是否跨域
         pathRewrite: {
-          '^/blog' : '' //将程序中的/api，替换为空字符串，再和target中的基础路径拼接起来作为发送到服务器的最终请求地址。
+          '^/blog' : '/blog' //将程序中的/api，替换为空字符串，再和target中的基础路径拼接起来作为发送到服务器的最终请求地址。
         }
       },
     //   '/user': {

@@ -1,77 +1,78 @@
 <template>
   <div class="test">
-    <div class="left">
-      <ul @click="activeTab($event)"
-          class="group">
-        <li class="item"
-            v-for="item in tabList"
-            :key="item.value"
-            :data-value="item.value">
-          {{item.label}}
-        </li>
-      </ul>
-    </div>
-    <div class="right">
-        <div v-for="item in 14" :key="item.value">
-            <div>{{item}}</div>
-            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, nam cumque? Quasi commodi dolore temporibus reprehenderit nam cupiditate ipsum illo saepe explicabo nesciunt provident dolorem, aspernatur minus mollitia adipisci earum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, nam cumque? Quasi commodi dolore temporibus reprehenderit nam cupiditate ipsum illo saepe explicabo nesciunt provident dolorem, aspernatur minus mollitia adipisci earum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, nam cumque? Quasi commodi dolore temporibus reprehenderit nam cupiditate ipsum illo saepe explicabo nesciunt provident dolorem, aspernatur minus mollitia adipisci earum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, nam cumque? Quasi commodi dolore temporibus reprehenderit nam cupiditate ipsum illo saepe explicabo nesciunt provident dolorem, aspernatur minus mollitia adipisci earum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, nam cumque? Quasi commodi dolore temporibus reprehenderit nam cupiditate ipsum illo saepe explicabo nesciunt provident dolorem, aspernatur minus mollitia adipisci earum!Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, nam cumque? Quasi commodi dolore temporibus reprehenderit nam cupiditate ipsum illo saepe explicabo nesciunt provident dolorem, aspernatur minus mollitia adipisci earum!</div>
-        </div>
-    </div>
-
+    <iframe id="testIframe"
+            ref="testIframe"
+            src="http://localhost:8080/userCenter"
+            width="100%"
+            height="100%"
+            frameborder="0"></iframe>
+    <el-drawer :visible.sync="drawerData.visible"
+               size="100%"
+               @close="close">
+      123
+      <!-- <iframe id="testIframe"
+              ref="testIframe"
+              src="http://localhost:8080/userCenter"
+              width="100%"
+              height="100%"
+              frameborder="0"></iframe> -->
+    </el-drawer>
   </div>
 </template>
 
 <script>
-import aplayer from "../components/vueAplayer"
+import drag from '@/components/drag/drag.vue'
 export default {
-  // components:{
-  //     "aplayer":aplayer
-  // },
+  components: {
+    // drag
+  },
+  porps: {
+    type: String,
+    default: ''
+  },
   data () {
     return {
-      tabList: [
-        {
-          label: '菜单一',
-          value: 1
-        },
-        {
-          label: '菜单二',
-          value: 2
-        },
-        {
-          label: '菜单三',
-          value: 3
-        }
-      ]
+      drawerData: {
+        visible: false
+      },
+    }
+  },
+  created () {
+    window.addEventListener('message', (e) => {
+      if (e.data.type == 'openDrawer')
+        this.drawerData.visible = true
+    })
+    let obj = {
+      a: 1,
+      b: 2,
+      c: 3
+    }
+    if (obj ?.d) {
+      console.log(true)
+    } else {
+      console.log(false)
+    }
+    let value = 123
+    if((value??'')!=''){
+        console.log(1)
+    }else{
+        console.log(2)
     }
   },
   methods: {
-    activeTab (e) {
-      console.log(e.target.dataset.value)
-      console.log(this.$mount('.group'))
+    close () {
+      parent.postMessage({
+        type: "drawerClose"
+      }, "*")
     }
   }
 }
 </script>
 
-<style lang="scss">
-@import "public/css/common.scss";
-.test {
-    display: flex;
-    .right{
-        flex: 0 1 100%;
-        height: 100vh;
-        border: 1px solid #000;
-        overflow: auto;
-    }
-  .group {
-    // @extend .flex-between;
-    width: 300px;
-    .item {
-      padding: 10px 29px;
-      border: 1px solid #eee;
-      cursor: pointer;
-    }
-  }
+<style lang="scss" scoped>
+.item {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #000;
 }
 </style>

@@ -38,20 +38,16 @@ export default {
       pageSize: this.pageSize,
     };
     Http.getArticleList(params).then((res) => {
-      console.log(res);
     });
     let obj={a:1,b:2,c:{d:3},e:[4,5,6],f:null,g:undefined,h:''}
     let obj2=this.$utils.deepClone(obj)
-    console.log(obj2)
   },
   watch: {
     isShow() {
-      console.log(this.isShow, "isShow");
     },
   },
   methods: {
       show(){
-          console.log(0)
       },
     getText(val) {
       let {
@@ -71,10 +67,8 @@ export default {
         createDate,
         articleAuthorId,
       };
-      console.log("请求数据", params);
       return
       Http.addArticle(params).then((res) => {
-        console.log(res);
         let vm = this;
         if (res) {
           if (res.msg === "success") {

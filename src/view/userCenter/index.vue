@@ -1,5 +1,7 @@
 <template>
   <div class="userCenter">
+    <el-button @click="openDrawer">打开</el-button>
+
     <el-row>
       <!-- 菜单工作台 -->
       <el-col :span="6"
@@ -77,7 +79,24 @@ export default {
     closeCollapse () {
       this.activeName = "";
     },
+    openDrawer () {
+      this.$nextTick(() => {
+        let testIframe2 = document.getElementById('testIframe')
+        // console.log(testIframe, testIframe2)
+        parent.postMessage({
+          type: "openDrawer",
+          url: "http://localhost:8080/userCenter",
+          data: {
+            a: 1, b: 2
+          }
+        }, '*')
+        window.addEventListener('message', (e) => {
+          if (e.data.type == "drawerClose") {
+          }
+        })
+      })
 
+    },
     checkUserInfo (userId) {
       let params = {
         userId: userId
@@ -87,8 +106,6 @@ export default {
           this.$set(this, "userInfo", res.data)
           res.data
         }
-        console.log(res)
-
       })
     },
   },
@@ -100,6 +117,13 @@ export default {
   },
   created () {
     this.checkUserInfo(1)
+
+  },
+  mounted () {
+    this.$nextTick(() => {
+      window.addEventListener('message', (e) => {
+      })
+    })
   }
 };
 </script>

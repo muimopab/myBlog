@@ -5,7 +5,7 @@ Vue.use(Router)
 
 const router = new Router({
     mode: "history",
-    scrollBehavior(to, from, savedPosition) {
+    scrollBehavior (to, from, savedPosition) {
         return { x: 0, y: 0 } // router跳转后scrollTop初始化
     },
     routes: [

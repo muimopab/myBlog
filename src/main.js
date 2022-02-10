@@ -13,7 +13,6 @@ import '../public/css/themeColor.scss'
 import * as directives from './directives/index'
 import utils from './utils/utils'
 
-
 Vue.use(ElementUI)
 Vue.use(mavonEditor)
 
@@ -33,8 +32,6 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-
-axios.defaults.baseURL = "/blog"||"/user";
 Vue.config.productionTip = false;
 
 new Vue({

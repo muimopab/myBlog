@@ -78,7 +78,6 @@ export default {
   },
   watch: {
     total () {
-      console.log(this.total);
       new Date().toLocaleDateString;
     },
   },
@@ -91,7 +90,6 @@ export default {
     },
     // 改变排序规则
     changeSortRules (val) {
-      console.log(val);
       if (val && val != this.sortRules) {
         this.sortRules = val;
         this.$message({

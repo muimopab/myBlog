@@ -2,7 +2,6 @@ import { Message } from "element-ui";
 
 export default {
     bind (el, binding,vnode) {
-        console.log(vnode)
         let btnNameList = binding.value;
         let btnResource = JSON.parse(sessionStorage.getItem("btnResource"))
         if (btnNameList && Array.isArray(btnNameList)) {

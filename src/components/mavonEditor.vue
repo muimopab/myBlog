@@ -128,10 +128,8 @@ export default {
         articleAuthorId: null,
         articleIntroduce: this.formData.introduce,
       };
-      console.log(params)
       // return false;
       Http.addArticle(params).then((res) => {
-        console.log(res);
         let vm = this;
         if (res) {
           if (res.msg === "success") {
@@ -157,7 +155,6 @@ export default {
       });
     },
     getMarkdownText(val, rander) {
-      // console.log(rander);
       this.formData.htmlText = rander;
     },
   },
@@ -165,7 +162,6 @@ export default {
     this.changeEvent = utils.debounce(this.getMarkdownText, 3000);
   },
   beforeDestroy() {
-    console.log("组件销毁");
   },
 };
 </script>
